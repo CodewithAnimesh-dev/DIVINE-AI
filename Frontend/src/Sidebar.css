@@ -1,0 +1,385 @@
+/* =========================
+   SIDEBAR
+   ========================= */
+
+.sidebar {
+    background: #0B1020;
+    color: #B8C1E0;
+
+    height: 100vh;
+    width: 300px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    border-right: 1px solid rgba(124, 131, 255, 0.10);
+
+    box-sizing: border-box;
+
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease;
+}
+
+
+/* =========================
+   LIGHT THEME
+   ========================= */
+
+.app.light .sidebar {
+    background: #EEF1FF;
+    color: #4A5275;
+
+    border-right: 1px solid rgba(79, 70, 229, 0.12);
+}
+
+
+/* =========================
+   NEW CHAT BUTTON
+   ========================= */
+
+.sidebar button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin: 14px;
+    padding: 11px 14px;
+
+    border-radius: 10px;
+
+    background: rgba(124, 131, 255, 0.06);
+
+    border: 1px solid rgba(124, 131, 255, 0.18);
+
+    color: #DDE2FF;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+
+.sidebar button:hover {
+    background: rgba(124, 131, 255, 0.12);
+
+    border-color: rgba(124, 131, 255, 0.30);
+
+    transform: translateY(-1px);
+}
+
+
+/* Light theme button */
+
+.app.light .sidebar button {
+    background: rgba(79, 70, 229, 0.06);
+
+    border-color: rgba(79, 70, 229, 0.16);
+
+    color: #30375A;
+}
+
+
+.app.light .sidebar button:hover {
+    background: rgba(79, 70, 229, 0.11);
+
+    border-color: rgba(79, 70, 229, 0.25);
+}
+
+
+/* =========================
+   DIVINE LOGO
+   ========================= */
+
+.logo {
+    height: 28px;
+    width: 28px;
+
+    background: #FFFFFF;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+    box-shadow:
+        0 0 12px rgba(124, 131, 255, 0.25);
+}
+
+
+/* =========================
+   NEW CHAT ICON
+   ========================= */
+
+.sidebar button span {
+    font-size: 15px;
+
+    color: #DDE2FF;
+}
+
+
+.app.light .sidebar button span {
+    color: #4F46E5;
+}
+
+
+/* =========================
+   CHAT HISTORY
+   ========================= */
+
+.history {
+    margin: 10px;
+    padding: 10px;
+
+    height: 100%;
+
+    overflow-y: auto;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================
+   HIDE HISTORY SCROLLBAR
+   ========================= */
+
+.history {
+    scrollbar-width: none;
+
+    -ms-overflow-style: none;
+}
+
+
+.history::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* =========================
+   INDIVIDUAL CHAT
+   ========================= */
+
+.history li {
+    list-style-type: none;
+
+    cursor: pointer;
+
+    padding: 9px 40px 9px 10px;
+
+    margin-bottom: 0.25rem;
+
+    font-size: 14px;
+
+    color: #AEB8D8;
+
+    border: 1px solid transparent;
+
+    border-radius: 9px;
+
+    position: relative;
+
+    transition: all 0.2s ease;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+/* Light theme history */
+
+.app.light .history li {
+    color: #5C6587;
+}
+
+
+/* =========================
+   CHAT HOVER
+   ========================= */
+
+.history li:hover {
+    background: rgba(124, 131, 255, 0.08);
+
+    color: #E6E9FF;
+}
+
+
+.app.light .history li:hover {
+    background: rgba(79, 70, 229, 0.08);
+
+    color: #30375A;
+}
+
+
+/* =========================
+   ACTIVE / HIGHLIGHTED CHAT
+   ========================= */
+
+.history li.highlighted {
+    background: rgba(124, 131, 255, 0.16);
+
+    color: #FFFFFF;
+
+    border: 1px solid rgba(124, 131, 255, 0.25);
+
+    box-shadow:
+        inset 3px 0 0 #7C83FF,
+        0 0 12px rgba(124, 131, 255, 0.05);
+}
+
+
+/* Light theme active chat */
+
+.app.light .history li.highlighted {
+    background: rgba(79, 70, 229, 0.13);
+
+    color: #30375A;
+
+    border-color: rgba(79, 70, 229, 0.20);
+
+    box-shadow:
+        inset 3px 0 0 #4F46E5,
+        0 0 12px rgba(79, 70, 229, 0.05);
+}
+
+
+/* =========================
+   ACTIVE CHAT HOVER
+   ========================= */
+
+.history li.highlighted:hover {
+    background: rgba(124, 131, 255, 0.20);
+
+    color: #FFFFFF;
+}
+
+
+.app.light .history li.highlighted:hover {
+    background: rgba(79, 70, 229, 0.18);
+
+    color: #252B4A;
+}
+
+
+/* =========================
+   DELETE ICON
+   ========================= */
+
+.history li .fa-trash {
+    opacity: 0;
+
+    position: absolute;
+
+    right: 10px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: #8F99BA;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+
+/* Show delete icon on hover */
+
+.history li:hover .fa-trash {
+    opacity: 1;
+
+    color: #DDE2FF;
+}
+
+
+/* Light theme delete icon */
+
+.app.light .history li .fa-trash {
+    color: #858DAA;
+}
+
+
+.app.light .history li:hover .fa-trash {
+    color: #5C6587;
+}
+
+
+/* =========================
+   DELETE ICON HOVER
+   ========================= */
+
+.history li .fa-trash:hover {
+    color: #F87171 !important;
+
+    transform: translateY(-50%) scale(1.1);
+}
+
+
+/* =========================
+   BOTTOM SIGNATURE
+   ========================= */
+
+.sign {
+    padding: 14px 10px;
+
+    margin: 10px;
+
+    font-size: 12px;
+
+    text-align: center;
+
+    color: #707A9D;
+
+    border-top: 1px solid rgba(124, 131, 255, 0.10);
+
+    transition:
+        color 0.3s ease,
+        border-color 0.3s ease;
+}
+
+
+/* Light theme signature */
+
+.app.light .sign {
+    color: #7A829F;
+
+    border-top-color: rgba(79, 70, 229, 0.12);
+}
+
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media (max-width: 768px) {
+
+    .sidebar {
+        width: 240px;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .sidebar {
+        width: 220px;
+    }
+
+    .history {
+        margin: 5px;
+
+        padding: 5px;
+    }
+
+    .sidebar button {
+        margin: 10px;
+    }
+
+}

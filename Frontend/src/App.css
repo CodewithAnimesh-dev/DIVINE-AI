@@ -1,0 +1,58 @@
+/* =========================
+   GLOBAL
+   ========================= */
+
+* {
+    box-sizing: border-box;
+
+    font-family:
+        Roboto,
+        'Open Sans',
+        'Helvetica Neue',
+        sans-serif;
+}
+
+
+/* =========================
+   BODY
+   ========================= */
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+
+/* =========================
+   APP
+   ========================= */
+
+.app {
+    min-height: 100vh;
+
+    display: flex;
+
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
+}
+
+
+/* =========================
+   DARK THEME
+   ========================= */
+
+.app.dark {
+    background-color: #0F1428;
+    color: #E6E9FF;
+}
+
+
+/* =========================
+   LIGHT THEME
+   ========================= */
+
+.app.light {
+    background-color: #F5F7FF;
+    color: #1F2440;
+}

@@ -1,0 +1,874 @@
+/* =========================
+   CHAT WINDOW
+   ========================= */
+
+.chatWindow {
+    background: #0F1428;
+    color: #E6E9FF;
+
+    height: 100vh;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+
+    position: relative;
+    overflow: hidden;
+
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
+}
+
+
+/* =========================
+   LIGHT THEME
+   ========================= */
+
+.app.light .chatWindow {
+    background: #F5F7FF;
+    color: #1F2440;
+}
+
+
+/* =========================
+   NAVBAR
+   ========================= */
+
+.navbar {
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border-bottom:
+        1px solid rgba(124, 131, 255, 0.08);
+
+    position: relative;
+    z-index: 10;
+
+    flex-shrink: 0;
+
+    transition:
+        border-color 0.3s ease;
+}
+
+
+.app.light .navbar {
+    border-bottom:
+        1px solid rgba(79, 70, 229, 0.12);
+}
+
+
+.navbar > span {
+    margin: 1rem 2rem;
+
+    color: #D8DCFF;
+
+    font-size: 1rem;
+    font-weight: 500;
+
+    transition:
+        color 0.3s ease;
+}
+
+
+.app.light .navbar > span {
+    color: #252B4A;
+}
+
+
+/* =========================
+   PROFILE ICON
+   ========================= */
+
+.userIconDiv {
+    margin: 1rem 2rem;
+
+    cursor: pointer;
+
+    border-radius: 50%;
+
+    transition:
+        transform 0.2s ease;
+}
+
+
+.userIconDiv:hover {
+    transform:
+        scale(1.05);
+}
+
+
+.userIcon {
+    background:
+        linear-gradient(
+            135deg,
+            #4F46E5,
+            #8B5CF6
+        );
+
+    height: 32px;
+    width: 32px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #FFFFFF;
+
+    box-shadow:
+        0 0 15px rgba(124, 131, 255, 0.20);
+
+    transition:
+        all 0.2s ease;
+}
+
+
+.userIconDiv:hover .userIcon {
+    box-shadow:
+        0 0 20px rgba(124, 131, 255, 0.40);
+}
+
+
+/* =========================
+   DROPDOWN
+   ========================= */
+
+.dropDown {
+    position: absolute;
+
+    top: 70px;
+    right: 25px;
+
+    width: 190px;
+
+    background: #171D38;
+
+    border:
+        1px solid rgba(124, 131, 255, 0.18);
+
+    padding: 8px;
+
+    border-radius: 12px;
+
+    text-align: left;
+
+    z-index: 1000;
+
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.40);
+
+    animation:
+        dropdownOpen 0.15s ease-out;
+
+    transition:
+        background-color 0.3s ease,
+        border-color 0.3s ease;
+}
+
+
+.app.light .dropDown {
+    background: #FFFFFF;
+
+    border:
+        1px solid rgba(79, 70, 229, 0.15);
+
+    box-shadow:
+        0 15px 35px rgba(31, 36, 64, 0.15);
+}
+
+
+@keyframes dropdownOpen {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+
+}
+
+
+/* =========================
+   DROPDOWN ITEMS
+   ========================= */
+
+.dropDownItem {
+    font-size: 0.9rem;
+
+    margin: 3px 0;
+
+    padding: 10px;
+
+    cursor: pointer;
+
+    color: #B8C1E0;
+
+    border-radius: 8px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    transition:
+        all 0.2s ease;
+}
+
+
+.app.light .dropDownItem {
+    color: #4A5275;
+}
+
+
+.dropDownItem i {
+    width: 18px;
+
+    text-align: center;
+
+    color: #7C83FF;
+}
+
+
+.dropDownItem:hover {
+    background:
+        rgba(124, 131, 255, 0.10);
+
+    color: #E6E9FF;
+
+    transform:
+        translateX(2px);
+}
+
+
+.app.light .dropDownItem:hover {
+    background:
+        rgba(79, 70, 229, 0.08);
+
+    color: #252B4A;
+}
+
+
+.dropDownItem:hover i {
+    color: #A5AAFF;
+}
+
+
+.app.light .dropDownItem:hover i {
+    color: #4F46E5;
+}
+
+
+/* =========================
+   CHAT INPUT AREA
+   ========================= */
+
+.chatInput {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    flex-shrink: 0;
+
+    padding-bottom: 10px;
+
+    position: relative;
+    z-index: 5;
+}
+
+
+/* =========================
+   LOADER
+   ========================= */
+
+.loader {
+    height: 35px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 5px;
+}
+
+
+/* =========================
+   IMAGE PREVIEW
+   ========================= */
+
+.imagePreviewContainer {
+    width: 100%;
+    max-width: 700px;
+
+    display: flex;
+    justify-content: flex-start;
+
+    margin-bottom: 10px;
+
+    position: relative;
+
+    box-sizing: border-box;
+}
+
+
+.imagePreview {
+    width: 120px;
+    height: 90px;
+
+    object-fit: cover;
+
+    border-radius: 12px;
+
+    border:
+        1px solid rgba(124, 131, 255, 0.25);
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.25);
+
+    display: block;
+}
+
+
+/* =========================
+   REMOVE IMAGE BUTTON
+   ========================= */
+
+.removeImageButton {
+    position: absolute;
+
+    top: -8px;
+    left: 105px;
+
+    width: 26px;
+    height: 26px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #2A3155;
+
+    color: #FFFFFF;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    z-index: 20;
+
+    box-shadow:
+        0 3px 10px rgba(0, 0, 0, 0.35);
+
+    transition:
+        transform 0.2s ease,
+        background-color 0.2s ease;
+}
+
+
+.removeImageButton:hover {
+    background: #4F46E5;
+
+    transform:
+        scale(1.1);
+}
+
+
+.removeImageButton i {
+    font-size: 15px;
+}
+
+
+/* LIGHT MODE IMAGE PREVIEW */
+
+.app.light .imagePreview {
+    border:
+        1px solid rgba(79, 70, 229, 0.25);
+
+    box-shadow:
+        0 8px 20px rgba(31, 36, 64, 0.15);
+}
+
+
+.app.light .removeImageButton {
+    background: #FFFFFF;
+
+    color: #4F46E5;
+
+    border:
+        1px solid rgba(79, 70, 229, 0.15);
+}
+
+
+.app.light .removeImageButton:hover {
+    background: #4F46E5;
+
+    color: #FFFFFF;
+}
+
+
+/* =========================
+   INPUT BOX
+   ========================= */
+
+.inputBox {
+    width: 100%;
+    max-width: 700px;
+
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================
+   TEXT INPUT
+   ========================= */
+
+.inputBox input[type="text"] {
+    width: 100%;
+    height: 56px;
+
+    border:
+        1px solid rgba(124, 131, 255, 0.18);
+
+    background:
+        rgba(255, 255, 255, 0.04);
+
+    color: #E6E9FF;
+
+    padding:
+        18px 145px 18px 20px;
+
+    font-size: 0.9rem;
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.15);
+
+    transition:
+        all 0.2s ease;
+
+    box-sizing: border-box;
+}
+
+
+.app.light .inputBox input[type="text"] {
+    background: #FFFFFF;
+
+    color: #252B4A;
+
+    border:
+        1px solid rgba(79, 70, 229, 0.15);
+
+    box-shadow:
+        0 10px 30px rgba(31, 36, 64, 0.08);
+}
+
+
+.inputBox input[type="text"]::placeholder {
+    color: #7F89AD;
+}
+
+
+.app.light
+.inputBox
+input[type="text"]::placeholder {
+    color: #8A91AD;
+}
+
+
+.inputBox input[type="text"]:focus {
+    outline: none;
+
+    border-color:
+        rgba(124, 131, 255, 0.5);
+
+    background:
+        rgba(124, 131, 255, 0.05);
+
+    box-shadow:
+        0 0 0 3px rgba(124, 131, 255, 0.08),
+        0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+
+.app.light
+.inputBox
+input[type="text"]:focus {
+    background: #FFFFFF;
+
+    border-color:
+        rgba(79, 70, 229, 0.45);
+
+    box-shadow:
+        0 0 0 3px rgba(79, 70, 229, 0.08),
+        0 10px 30px rgba(31, 36, 64, 0.10);
+}
+
+
+.inputBox
+input[type="text"]:disabled {
+    opacity: 0.7;
+
+    cursor: not-allowed;
+}
+
+
+/* =========================
+   IMAGE UPLOAD BUTTON
+   ========================= */
+
+.imageUpload {
+    position: absolute;
+
+    right: 95px;
+
+    top: 50%;
+
+    transform:
+        translateY(-50%);
+
+    width: 35px;
+    height: 35px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    color: #7C83FF;
+
+    z-index: 7;
+
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.imageUpload:hover {
+    color: #A5AAFF;
+
+    transform:
+        translateY(-50%)
+        scale(1.1);
+}
+
+
+.imageUpload i {
+    font-size: 18px;
+}
+
+
+.app.light .imageUpload {
+    color: #4F46E5;
+}
+
+
+.app.light .imageUpload:hover {
+    color: #6366F1;
+}
+
+
+/* =========================
+   VOICE INPUT
+   ========================= */
+
+.inputBox > *:not(
+    input
+):not(
+    #submit
+):not(
+    .imageUpload
+) {
+    position: absolute !important;
+
+    right: 55px !important;
+
+    top: 50% !important;
+
+    transform:
+        translateY(-50%) !important;
+
+    margin: 0 !important;
+
+    padding: 0 !important;
+
+    width: 35px;
+    height: 35px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    z-index: 6;
+
+    box-sizing: border-box;
+}
+
+
+/* MICROPHONE BUTTON */
+
+.inputBox > *:not(
+    input
+):not(
+    #submit
+):not(
+    .imageUpload
+) button {
+
+    width: 35px !important;
+    height: 35px !important;
+
+    padding: 0 !important;
+    margin: 0 !important;
+
+    border: none !important;
+
+    background:
+        transparent !important;
+
+    display: flex !important;
+
+    align-items: center !important;
+    justify-content: center !important;
+
+    cursor: pointer;
+
+    box-sizing: border-box;
+}
+
+
+/* MICROPHONE ICON */
+
+.inputBox > *:not(
+    input
+):not(
+    #submit
+):not(
+    .imageUpload
+) i {
+
+    margin: 0 !important;
+
+    font-size: 18px;
+
+    color: #7C83FF;
+
+    transition:
+        all 0.2s ease;
+}
+
+
+.inputBox > *:not(
+    input
+):not(
+    #submit
+):not(
+    .imageUpload
+) button:hover i {
+
+    color: #A5AAFF;
+
+    transform:
+        scale(1.08);
+}
+
+
+/* =========================
+   SEND BUTTON
+   ========================= */
+
+#submit {
+    position: absolute !important;
+
+    right: 15px !important;
+
+    top: 50% !important;
+
+    transform:
+        translateY(-50%) !important;
+
+    width: 35px !important;
+    height: 35px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    cursor: pointer;
+
+    display: flex !important;
+
+    align-items: center;
+    justify-content: center;
+
+    color: #7C83FF;
+
+    z-index: 8;
+
+    box-sizing: border-box;
+
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+#submit:hover {
+    color: #A5AAFF;
+
+    transform:
+        translateY(-50%)
+        scale(1.1) !important;
+}
+
+
+#submit i {
+    margin: 0;
+
+    font-size: 20px;
+}
+
+
+.app.light #submit {
+    color: #4F46E5;
+}
+
+
+.app.light #submit:hover {
+    color: #6366F1;
+}
+
+
+/* =========================
+   INFO TEXT
+   ========================= */
+
+.info {
+    font-size: 0.75rem;
+
+    padding: 0.5rem;
+
+    margin: 0;
+
+    color: #7F89AD;
+
+    transition:
+        color 0.3s ease;
+}
+
+
+.app.light .info {
+    color: #7A829F;
+}
+
+
+/* =========================
+   TABLET / MOBILE
+   ========================= */
+
+@media (max-width: 768px) {
+
+    .inputBox,
+    .imagePreviewContainer {
+        width: 90%;
+    }
+
+
+    .navbar > span {
+        margin-left: 1rem;
+    }
+
+
+    .userIconDiv {
+        margin-right: 1rem;
+    }
+
+}
+
+
+/* =========================
+   SMALL MOBILE
+   ========================= */
+
+@media (max-width: 480px) {
+
+    .inputBox,
+    .imagePreviewContainer {
+        width: 94%;
+    }
+
+
+    .inputBox input[type="text"] {
+        height: 52px;
+
+        padding-left: 16px;
+
+        padding-right: 135px;
+    }
+
+
+    .imageUpload {
+        right: 90px;
+    }
+
+
+    .inputBox > *:not(
+        input
+    ):not(
+        #submit
+    ):not(
+        .imageUpload
+    ) {
+        right: 50px !important;
+    }
+
+
+    #submit {
+        right: 10px !important;
+    }
+
+
+    .imagePreview {
+        width: 105px;
+        height: 80px;
+    }
+
+
+    .removeImageButton {
+        left: 90px;
+    }
+
+
+    .info {
+        font-size: 0.68rem;
+    }
+
+}
