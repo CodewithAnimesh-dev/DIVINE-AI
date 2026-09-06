@@ -296,39 +296,37 @@ function ChatWindow() {
 
             const response = await fetch(
 
-                "http://localhost:8080/api/chat",
+    `${import.meta.env.VITE_API_URL}/api/chat`,
 
-                {
+    {
 
-                    method: "POST",
+        method: "POST",
 
-                    credentials: "include",
+        credentials: "include",
 
+        headers: {
 
-                    headers: {
+            "Content-Type":
+                "application/json"
 
-                        "Content-Type":
-                            "application/json"
+        },
 
-                    },
+        body: JSON.stringify({
 
+            message:
+                userMessage,
 
-                    body: JSON.stringify({
+            threadId:
+                currThreadId,
 
-                        message:
-                            userMessage,
+            image:
+                imageData
 
-                        threadId:
-                            currThreadId,
+        })
 
-                        image:
-                            imageData
+    }
 
-                    })
-
-                }
-
-            );
+);
 
 
             const res =

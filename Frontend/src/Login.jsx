@@ -18,7 +18,9 @@ function Login({
 
         if (!email || !password) {
 
-            setMessage("Please enter email and password.");
+            setMessage(
+                "Please enter email and password."
+            );
 
             return;
         }
@@ -29,7 +31,7 @@ function Login({
         try {
 
             const response = await fetch(
-                "http://localhost:8080/api/auth/login",
+                `${import.meta.env.VITE_API_URL}/api/auth/login`,
                 {
                     method: "POST",
 
@@ -72,7 +74,10 @@ function Login({
 
         } catch (error) {
 
-            console.log("Login error:", error);
+            console.log(
+                "Login error:",
+                error
+            );
 
             setMessage(
                 "Unable to connect to the server."
