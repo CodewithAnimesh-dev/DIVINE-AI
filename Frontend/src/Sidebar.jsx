@@ -2,6 +2,7 @@ import "./Sidebar.css";
 import { useContext, useEffect } from "react";
 import { MyContext } from "./MyContext.jsx";
 import { v1 as uuidv1 } from "uuid";
+import divineLogo from "./assets/DIVINE.png.jpeg";
 
 function Sidebar() {
 
@@ -243,7 +244,7 @@ function Sidebar() {
             <button onClick={createNewChat}>
 
                 <img
-                    src="src/assets/DIVINE.png.jpeg"
+                    src={divineLogo}
                     alt="Divine Logo"
                     className="logo"
                 />
