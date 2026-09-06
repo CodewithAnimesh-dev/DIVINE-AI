@@ -75,6 +75,11 @@ const connectDB = async () => {
 // START SERVER
 // ===============================
 
+app.get("/", (req, res) => {
+    res.send("DIVINE AI Backend is running successfully 🚀");
+});
+
+
 app.listen(PORT, () => {
 
     console.log(
