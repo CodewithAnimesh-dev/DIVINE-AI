@@ -7,6 +7,24 @@ const router = express.Router();
 
 
 // ===============================
+// COOKIE OPTIONS
+// ===============================
+
+const cookieOptions = {
+    httpOnly: true,
+
+    secure: process.env.NODE_ENV === "production",
+
+    sameSite:
+        process.env.NODE_ENV === "production"
+            ? "none"
+            : "lax",
+
+    maxAge: 7 * 24 * 60 * 60 * 1000
+};
+
+
+// ===============================
 // REGISTER
 // ===============================
 
@@ -21,7 +39,6 @@ router.post("/register", async (req, res) => {
         } = req.body;
 
 
-        // Check required fields
         if (!username || !email || !password) {
 
             return res.status(400).json({
@@ -31,7 +48,6 @@ router.post("/register", async (req, res) => {
         }
 
 
-        // Check password length
         if (password.length < 6) {
 
             return res.status(400).json({
@@ -41,10 +57,10 @@ router.post("/register", async (req, res) => {
         }
 
 
-        // Check if email already exists
         const existingEmail = await User.findOne({
             email
         });
+
 
         if (existingEmail) {
 
@@ -55,10 +71,10 @@ router.post("/register", async (req, res) => {
         }
 
 
-        // Check username
         const existingUsername = await User.findOne({
             username
         });
+
 
         if (existingUsername) {
 
@@ -69,18 +85,14 @@ router.post("/register", async (req, res) => {
         }
 
 
-        // Hash password
         const hashedPassword =
             await bcrypt.hash(password, 10);
 
 
-        // Create user
         const user = new User({
 
             username,
-
             email,
-
             password: hashedPassword
 
         });
@@ -128,7 +140,6 @@ router.post("/login", async (req, res) => {
         } = req.body;
 
 
-        // Check fields
         if (!email || !password) {
 
             return res.status(400).json({
@@ -138,7 +149,6 @@ router.post("/login", async (req, res) => {
         }
 
 
-        // Find user
         const user = await User.findOne({
             email
         });
@@ -153,7 +163,6 @@ router.post("/login", async (req, res) => {
         }
 
 
-        // Compare password
         const isPasswordCorrect =
             await bcrypt.compare(
                 password,
@@ -170,7 +179,6 @@ router.post("/login", async (req, res) => {
         }
 
 
-        // Create JWT
         const token = jwt.sign(
 
             {
@@ -188,16 +196,11 @@ router.post("/login", async (req, res) => {
         );
 
 
-        // Store JWT in HTTP-only cookie
+        // Store JWT in cookie
         res.cookie(
             "token",
             token,
-            {
-                httpOnly: true,
-                secure: false,
-                sameSite: "lax",
-                maxAge: 7 * 24 * 60 * 60 * 1000
-            }
+            cookieOptions
         );
 
 
@@ -232,7 +235,21 @@ router.post("/login", async (req, res) => {
 
 router.post("/logout", (req, res) => {
 
-    res.clearCookie("token");
+    res.clearCookie(
+        "token",
+        {
+            httpOnly: true,
+
+            secure:
+                process.env.NODE_ENV === "production",
+
+            sameSite:
+                process.env.NODE_ENV === "production"
+                    ? "none"
+                    : "lax"
+        }
+    );
+
 
     res.json({
         message: "Logout successful"
@@ -250,6 +267,7 @@ router.get("/me", async (req, res) => {
     try {
 
         const token = req.cookies.token;
+
 
         if (!token) {
 
@@ -285,6 +303,11 @@ router.get("/me", async (req, res) => {
         });
 
     } catch (err) {
+
+        console.log(
+            "Authentication error:",
+            err.message
+        );
 
         res.status(401).json({
             error: "Not authenticated"
